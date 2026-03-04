@@ -49,8 +49,11 @@ body{
     color:#6b7280;
 }
 
+/* PHOTO SECTION */
+
 .photo-box{
     height:90px;
+    width:90px;
     border-radius:12px;
     border:2px dashed #d1d5db;
     display:flex;
@@ -60,6 +63,8 @@ body{
     background:#f9fafb;
     color:#3b5bdb;
     font-weight:500;
+    cursor:pointer;
+    flex-shrink:0;
 }
 
 .photo-thumb{
@@ -69,6 +74,7 @@ body{
     overflow:hidden;
     position:relative;
     margin-right:10px;
+    flex-shrink:0;
 }
 
 .photo-thumb img{
@@ -90,6 +96,7 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
+    cursor:pointer;
 }
 
 .btn-publish{
@@ -120,6 +127,75 @@ body{
     gap:20px;
 }
 
+/* INPUT AVEC ICONE */
+
+.input-icon{
+    position:relative;
+}
+
+.input-icon i{
+    position:absolute;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#3b5bdb;
+    font-size:16px;
+}
+
+.custom-input{
+    padding-left:38px;
+    border-radius:12px;
+    border:1px solid #e5e7eb;
+    transition:all 0.3s ease;
+}
+
+/* Effet Focus Premium */
+.custom-input:focus{
+    border-color:#3b5bdb;
+    box-shadow:0 0 0 4px rgba(59,91,219,0.15);
+}
+
+
+
+/* HEADER MODERNE */
+
+.modern-header{
+    background:linear-gradient(135deg,#3b5bdb,#2f4bcf);
+    padding:20px;
+    border-radius:20px;
+    color:white;
+    margin-bottom:20px;
+    box-shadow:0 10px 25px rgba(59,91,219,0.25);
+}
+
+.header-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.header-top i{
+    font-size:20px;
+    cursor:pointer;
+}
+
+.header-icons{
+    display:flex;
+    gap:15px;
+}
+
+.header-content h4{
+    font-weight:600;
+    margin-bottom:5px;
+}
+
+.header-content p{
+    font-size:14px;
+    opacity:0.9;
+    margin:0;
+}
+
 </style>
 </head>
 
@@ -127,125 +203,119 @@ body{
 
 <div class="mobile-container">
 
-<!-- Header -->
-<div class="header">
-    <i class="bi bi-arrow-left fs-4"></i>
-    <h5>Publier une annonce</h5>
-    <i class="bi bi-bell fs-4"></i>
-</div>
+<!-- Header Modernisé -->
+<div class="modern-header">
 
-<p class="text-muted-small">
-Remplissez le formulaire ci-dessous pour publier votre annonce de voiture.
-</p>
+    <div class="header-top">
+        <i class="bi bi-arrow-left"></i>
+        <div class="header-icons">
+            <i class="bi bi-bell"></i>
+            <i class="bi bi-person-circle"></i>
+        </div>
+    </div>
+
+    <div class="header-content">
+        <h4>Publier votre véhicule</h4>
+        <p>Ajoutez les informations de votre voiture pour trouver rapidement un acheteur.</p>
+    </div>
+
+</div>
 
 <!-- Photos -->
 <div class="card-custom">
+
     <label class="form-label">Vos photos (5 max)*</label>
-    <div class="d-flex mt-2 overflow-auto">
 
-        <div class="photo-box me-2">
+    <div class="d-flex mt-2 overflow-auto align-items-center" id="photoWrapper">
+
+        <!-- Bouton Ajouter -->
+        <div class="photo-box me-2" id="addPhotoBtn">
             <i class="bi bi-plus fs-4"></i>
-            <small>Ajouter photo</small>
-        </div>
-
-        <div class="photo-thumb">
-            <img src="https://images.unsplash.com/photo-1549924231-f129b911e442" alt="">
-            <div class="remove-btn">x</div>
-        </div>
-
-        <div class="photo-thumb">
-            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d" alt="">
-            <div class="remove-btn">x</div>
-        </div>
-
-        <div class="photo-thumb">
-            <img src="https://images.unsplash.com/photo-1583267746897-2cf415887172" alt="">
-            <div class="remove-btn">x</div>
+            <small>Ajouter</small>
         </div>
 
     </div>
+
+    <input type="file" id="photoInput" accept="image/*" multiple hidden>
+
+    <div class="text-muted-small mt-2">
+        <span id="photoCount">0</span> / 5 images
+    </div>
+
+    <div id="photoError" class="text-danger small mt-1"></div>
+
 </div>
 
-<!-- Form Row 1 -->
+<!-- RESTE DU FORMULAIRE (inchangé) -->
+
 <div class="row g-3">
-<div class="col-6">
-    <div class="card-custom">
-        <label class="form-label">Marque *</label>
-        <select class="form-select">
-            <option>Toyota</option>
-        </select>
+    
+    <div class="col-6">
+        <div class="card-custom">
+            <label class="form-label">Marque *</label>
+            <div class="input-icon">
+                <i class="bi bi-car-front-fill"></i>
+                <input type="text" class="form-control custom-input" placeholder="Ex: Toyota">
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="col-6">
-    <div class="card-custom">
-        <label class="form-label">Modèle *</label>
-        <select class="form-select">
-            <option>RAV4</option>
-        </select>
+    <div class="col-6">
+        <div class="card-custom">
+            <label class="form-label">Modèle *</label>
+            <div class="input-icon">
+                <i class="bi bi-tag-fill"></i>
+                <input type="text" class="form-control custom-input" placeholder="Ex: RAV4">
+            </div>
+        </div>
     </div>
-</div>
-</div>
 
+</div>
 <!-- Row 2 -->
 <div class="row g-3 mt-1">
-<div class="col-6">
-    <div class="card-custom">
-        <label class="form-label">Année *</label>
-        <select class="form-select">
-            <option>2018</option>
-        </select>
+
+    <div class="col-6">
+        <div class="card-custom">
+            <label class="form-label">Année *</label>
+            <div class="input-icon">
+                <i class="bi bi-calendar-event-fill"></i>
+                <input type="number" class="form-control custom-input" placeholder="Ex: 2018">
+            </div>
+        </div>
     </div>
+
+    <div class="col-6">
+        <div class="card-custom">
+            <label class="form-label">Kilométrage *</label>
+            <div class="input-icon">
+                <i class="bi bi-speedometer2"></i>
+                <input type="text" class="form-control custom-input" placeholder="Ex: 85 000 km">
+            </div>
+        </div>
+    </div>
+
 </div>
 
-<div class="col-6">
-    <div class="card-custom">
-        <label class="form-label">Kilométrage *</label>
-        <input type="text" class="form-control" value="85 000 km">
-    </div>
-</div>
-</div>
 
 <!-- Prix -->
 <div class="card-custom mt-3">
     <label class="form-label">Prix *</label>
-    <input type="text" class="form-control mb-3" value="7 500 000 FCFA">
 
-    <div class="radio-group">
-        <div>
-            <input type="radio" name="etat"> Neuf
-        </div>
-        <div>
-            <input type="radio" name="etat"> Occasion
-        </div>
+    <div class="input-icon mb-3">
+        <i class="bi bi-cash-stack"></i>
+        <input type="text" class="form-control custom-input" placeholder="Ex: 7 500 000 FCFA">
     </div>
-</div>
 
-<!-- Carburant + Transmission -->
-<div class="row g-3 mt-1">
-<div class="col-6">
-    <div class="card-custom">
-        <label class="form-label">Carburant *</label>
-        <select class="form-select">
-            <option>Essence</option>
-        </select>
-    </div>
-</div>
+   
 
-<div class="col-6">
-    <div class="card-custom">
-        <label class="form-label">Transmission *</label>
-        <select class="form-select">
-            <option>Automatique</option>
-        </select>
-    </div>
-</div>
-</div>
 
 <!-- Ville -->
 <div class="card-custom mt-3">
     <label class="form-label">Ville *</label>
-    <input type="text" class="form-control" value="Bamako">
+    <div class="input-icon">
+        <i class="bi bi-geo-alt-fill"></i>
+        <input type="text" class="form-control custom-input" placeholder="Ex: Bamako">
+    </div>
 </div>
 
 <!-- Description -->
@@ -255,10 +325,76 @@ Remplissez le formulaire ci-dessous pour publier votre annonce de voiture.
     <div class="text-end text-muted-small mt-1">180/500 caractères</div>
 </div>
 
-<!-- Bouton -->
 <button class="btn-publish mt-3">Publier</button>
 
 </div>
+
+<script>
+const addPhotoBtn = document.getElementById("addPhotoBtn");
+const photoInput = document.getElementById("photoInput");
+const photoWrapper = document.getElementById("photoWrapper");
+const photoError = document.getElementById("photoError");
+const photoCount = document.getElementById("photoCount");
+
+let imagesArray = [];
+const maxImages = 5;
+
+addPhotoBtn.addEventListener("click", () => {
+    if(imagesArray.length >= maxImages){
+        photoError.textContent = "Maximum 5 images autorisées.";
+        return;
+    }
+    photoInput.click();
+});
+
+photoInput.addEventListener("change", function () {
+
+    const files = Array.from(this.files);
+
+    if (imagesArray.length + files.length > maxImages) {
+        photoError.textContent = "Vous ne pouvez pas dépasser 5 images.";
+        return;
+    }
+
+    photoError.textContent = "";
+
+    files.forEach(file => {
+
+        imagesArray.push(file);
+
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+
+            const photoDiv = document.createElement("div");
+            photoDiv.classList.add("photo-thumb");
+
+            photoDiv.innerHTML = `
+                <img src="${e.target.result}">
+                <div class="remove-btn">&times;</div>
+            `;
+
+            photoDiv.querySelector(".remove-btn").addEventListener("click", () => {
+                photoDiv.remove();
+                imagesArray = imagesArray.filter(img => img !== file);
+                updateCounter();
+                photoError.textContent = "";
+            });
+
+            photoWrapper.insertBefore(photoDiv, addPhotoBtn);
+            updateCounter();
+        };
+
+        reader.readAsDataURL(file);
+    });
+
+    photoInput.value = "";
+});
+
+function updateCounter(){
+    photoCount.textContent = imagesArray.length;
+}
+</script>
 
 </body>
 </html>
